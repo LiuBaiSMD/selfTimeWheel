@@ -60,7 +60,7 @@ func (this *TimeWheel) Stop() {
 	close(this.exit)
 }
 
-func (this *TimeWheel) AddTimer(delay float64, delayFunc func()) *TimerProxy{
+func (this *TimeWheel) AddTimer(delay float64, delayFunc func()) *TimerProxy {
 	nowTime := time.Now().UnixNano()
 	fmt.Println("AddTimer: ", nowTime, int64(nanoTimerMultiTest*delay))
 	timer := &TimerProxy{

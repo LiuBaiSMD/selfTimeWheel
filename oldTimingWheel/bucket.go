@@ -72,13 +72,6 @@ func newBucket() *bucket {
 	}
 }
 
-func NewBucket() *bucket {
-	return &bucket{
-		timers:     list.New(),
-		expiration: -1,
-	}
-}
-
 func (b *bucket) Expiration() int64 {
 	return atomic.LoadInt64(&b.expiration)
 }

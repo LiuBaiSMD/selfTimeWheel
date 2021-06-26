@@ -16,13 +16,21 @@ type TimerProxy struct {
 	delayFunc func()  //延时调用的方法
 	tickTime  int64   //调用时间
 	repeat    bool    //调用完毕后重新写入
+	cancel    bool    //
 }
 
 func (tp *TimerProxy) Tick() {
-	tp.delayFunc()
+	if tp.CheckValid(){
+		tp.delayFunc()
+	}
 }
 
-// 这个方法需要停止自己的定时任务
-func (tp *TimerProxy) Cancle() {
-	tp.delayFunc()
+// 停止自己的定时任务，将任务的cancel标志位置为true
+func (tp *TimerProxy) Cancel() {
+	tp.cancel = true
+}
+
+// 判断定时任务是否有效
+func (tp *TimerProxy) CheckValid() bool {
+	return !tp.cancel
 }
