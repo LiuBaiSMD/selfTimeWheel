@@ -4,7 +4,7 @@
 @Desc: use for what
 */
 
-package main
+package timeWheel
 
 const (
 	nanoTimerMulti     = 1000000000.0

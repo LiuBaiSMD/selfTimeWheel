@@ -4,7 +4,7 @@
 @Desc: use for what
 */
 
-package main
+package timeWheel
 
 import (
 	"fmt"
@@ -19,6 +19,15 @@ type TimeWheel struct {
 }
 
 //var timeWheel TimeWheel
+
+func NewTimeWheel(tickInterval time.Duration) *TimeWheel{
+	return &TimeWheel{
+		[]*TimerProxy{},
+		tickInterval,
+		time.Now().UnixNano(),
+		make(chan interface{}),
+	}
+}
 
 func init() {
 	// 启动定时
@@ -68,7 +77,7 @@ func (this *TimeWheel) AddTimer(delay float64, delayFunc func()) *TimerProxy {
 		delayFunc: delayFunc,
 		tickTime:  nowTime + int64(nanoTimerMulti*delay), //time.Now().UnixNano()+int64(nanoTimerMultiTest*delay),
 	}
-	this.timers = append(timeWheel.timers, timer)
+	this.timers = append(this.timers, timer)
 	return timer
 }
 
