@@ -3,7 +3,7 @@ package oldTimingWheel_test
 import (
 	"testing"
 	"time"
-	timingWheel "timeWheel/oldTimingWheel"
+	timeWheelTest "timeWheelTest/oldTimingWheel"
 )
 
 func genD(i int) time.Duration {
@@ -11,7 +11,7 @@ func genD(i int) time.Duration {
 }
 
 func BenchmarkTimingWheel_StartStop(b *testing.B) {
-	tw := timingWheel.NewTimingWheel(time.Millisecond, 20)
+	tw := timeWheelTest.NewTimingWheel(time.Millisecond, 20)
 	tw.Start()
 	defer tw.Stop()
 
@@ -25,7 +25,7 @@ func BenchmarkTimingWheel_StartStop(b *testing.B) {
 	}
 	for _, c := range cases {
 		b.Run(c.name, func(b *testing.B) {
-			base := make([]*timingWheel.Timer, c.N)
+			base := make([]*timeWheelTest.Timer, c.N)
 			for i := 0; i < len(base); i++ {
 				base[i] = tw.AfterFunc(genD(i), func() {})
 			}

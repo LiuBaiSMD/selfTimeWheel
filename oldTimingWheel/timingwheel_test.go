@@ -3,11 +3,11 @@ package oldTimingWheel_test
 import (
 	"testing"
 	"time"
-	timingwheel "timeWheel/oldTimingWheel"
+	timeWheelTest "timeWheelTest/oldTimingWheel"
 )
 
 func TestTimingWheel_AfterFunc(t *testing.T) {
-	tw := timingwheel.NewTimingWheel(time.Millisecond, 20)
+	tw := timeWheelTest.NewTimingWheel(time.Millisecond, 20)
 	tw.Start()
 	defer tw.Stop()
 
@@ -55,7 +55,7 @@ func (s *scheduler) Next(prev time.Time) time.Time {
 }
 
 func TestTimingWheel_ScheduleFunc(t *testing.T) {
-	tw := timingwheel.NewTimingWheel(time.Millisecond, 20)
+	tw := timeWheelTest.NewTimingWheel(time.Millisecond, 20)
 	tw.Start()
 	defer tw.Stop()
 

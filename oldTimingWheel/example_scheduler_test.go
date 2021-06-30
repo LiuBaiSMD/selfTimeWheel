@@ -3,7 +3,7 @@ package oldTimingWheel_test
 import (
 	"fmt"
 	"time"
-	timingwheel "timeWheel/oldTimingWheel"
+	timeWheelTest "timeWheelTest/oldTimingWheel"
 )
 
 type EveryScheduler struct {
@@ -15,7 +15,7 @@ func (s *EveryScheduler) Next(prev time.Time) time.Time {
 }
 
 func Example_scheduleTimer() {
-	tw := timingwheel.NewTimingWheel(time.Millisecond, 20)
+	tw := timeWheelTest.NewTimingWheel(time.Millisecond, 20)
 	tw.Start()
 	defer tw.Stop()
 

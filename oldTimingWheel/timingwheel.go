@@ -6,16 +6,16 @@ import (
 	"time"
 	"unsafe"
 
-	"timeWheel/delayqueue"
+	"timeWheelTest/delayqueue"
 )
 
 // TimingWheel is an implementation of Hierarchical Timing Wheels.
 type TimingWheel struct {
-	tick      int64 // in milliseconds
-	wheelSize int64
+	tick      int64 // in milliseconds 每次检测的时间间隔
+	wheelSize int64	// 总共有多少个时间槽
 
-	interval    int64 // in milliseconds
-	currentTime int64 // in milliseconds
+	interval    int64 // in milliseconds tick和wheelSize的乘积
+	currentTime int64 // in milliseconds	当前时间
 	buckets     []*bucket
 	queue       *delayqueue.DelayQueue
 
@@ -66,7 +66,7 @@ func newTimingWheel(tickMs int64, wheelSize int64, startMs int64, queue *delayqu
 func (tw *TimingWheel) add(t *Timer) bool {
 	currentTime := atomic.LoadInt64(&tw.currentTime)
 	if t.expiration < currentTime+tw.tick {
-		// Already expired
+		// Already expired 加入的时候是否已经过期
 		return false
 	} else if t.expiration < currentTime+tw.interval {
 		// Put it into its own bucket
@@ -96,7 +96,7 @@ func (tw *TimingWheel) add(t *Timer) bool {
 				unsafe.Pointer(newTimingWheel(
 					tw.interval,
 					tw.wheelSize,
-					currentTime,
+					currentTime, // 不太理解这快为啥要这个时间轮的时间
 					tw.queue,
 				)),
 			)

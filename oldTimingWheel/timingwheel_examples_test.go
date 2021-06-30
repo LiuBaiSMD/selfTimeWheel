@@ -3,11 +3,11 @@ package oldTimingWheel_test
 import (
 	"fmt"
 	"time"
-	timingwheel "timeWheel/oldTimingWheel"
+	timeWheelTest "timeWheelTest/oldTimingWheel"
 )
 
 func Example_startTimer() {
-	tw := timingwheel.NewTimingWheel(time.Millisecond, 20)
+	tw := timeWheelTest.NewTimingWheel(time.Millisecond, 20)
 	tw.Start()
 	defer tw.Stop()
 
@@ -24,7 +24,7 @@ func Example_startTimer() {
 }
 
 func Example_stopTimer() {
-	tw := timingwheel.NewTimingWheel(time.Millisecond, 20)
+	tw := timeWheelTest.NewTimingWheel(time.Millisecond, 20)
 	tw.Start()
 	defer tw.Stop()
 
